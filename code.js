@@ -1,5 +1,5 @@
 const video = document.createElement('video');
-video.src = 'https://github.com/mea1k/s/raw/refs/heads/main/video_2025-08-07_16-10-20.mp4';
+video.src = 'https://github.com/mea1k/s/raw/refs/heads/main/youtubecom%20video720p.mp4';
 video.muted = false;
 video.controls = true;
 video.style.position = 'fixed';
