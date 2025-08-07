@@ -1,5 +1,5 @@
 const video = document.createElement('video');
-video.src = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm';
+video.src = 'https://github.com/mea1k/s/raw/refs/heads/main/video_2025-08-07_16-10-20.mp4';
 video.muted = false;
 video.controls = true;
 video.style.position = 'fixed';
