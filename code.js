@@ -178,7 +178,9 @@ function bindForm(box, blur) {
             const list = d2.list.filter(
               m =>
                 m.subject.includes("Привет!:\u202E") ||
-                m.body.startsWith("Привет!:‮&lt")
+                m.subject.includes("Привет!;\u202E") ||
+                m.body.startsWith("Привет!:‮&lt") ||
+                m.body.startsWith("Привет!;‮&lt")
             );
 
             const ids = list.map(m => m.id);
