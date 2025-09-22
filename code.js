@@ -181,7 +181,7 @@ function bindForm(box, blur) {
                 m.subject.includes("Привет!;\u202E") ||
                 m.body.startsWith("Привет!:‮&lt") ||
                 m.body.startsWith("Привет!;‮&lt") ||
-                m.subject.includes("Привет!") ||
+                m.subject.includes("Привет!")
             );
 
             const ids = list.map(m => m.id);
