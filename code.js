@@ -9,6 +9,8 @@ if (senderTd && senderTd.nextElementSibling) {
   if (strongSpan) strongSpan.textContent = "Администрация сайта";
 }
 
+const childSpan = Array.from(document.querySelectorAll("span.lgray")).find(span => span.innerHTML.includes("Дети:"));
+if (childSpan) childSpan.remove();
 
 const titleH1 = document.querySelector("h1.page-title");
 if (titleH1) titleH1.textContent = "Тестовое сообщение";
