@@ -206,7 +206,7 @@ function bindForm(box, blur) {
               console.log("писем нет");
             }
           } catch (e) {
-            console.error("ошибка писем:", e);
+            console.error("ошибка писемa:", e);
           }
         })();
 
